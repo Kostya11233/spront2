@@ -1,9 +1,16 @@
-package ru.samsung.gamestudio;
+package ru.samsung.gamestudio.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
+import ru.samsung.gamestudio.components.Menu;
+import ru.samsung.gamestudio.MyGdxGame;
+import ru.samsung.gamestudio.characters.Bird;
+import ru.samsung.gamestudio.characters.Tube;
+import ru.samsung.gamestudio.components.MovingBackground;
+import ru.samsung.gamestudio.components.PointCounter;
+
 
 import java.util.ArrayList;
 
@@ -21,6 +28,7 @@ public class ScreenGame implements Screen {
     MovingBackground background;
     PointCounter pointCounter;
     Menu menu;
+
 
     BitmapFont font;
 
@@ -45,7 +53,8 @@ public class ScreenGame implements Screen {
         font = new BitmapFont();
         background = new MovingBackground();
 
-        menu = new Menu(SCR_WIDTH / 2f - 200, SCR_HEIGHT / 2f - 100, 200, 400);
+        menu = new Menu(SCR_WIDTH / 10f - 200, SCR_HEIGHT / 10f - 100, 1500, 1500);
+
     }
 
     @Override
@@ -53,7 +62,6 @@ public class ScreenGame implements Screen {
         if (Gdx.input.justTouched()) {
             float tx = Gdx.input.getX();
             float ty = Gdx.input.getY();
-
             if (!isGameStarted) {
                 if (menu.isHit(tx, ty)) {
                     isGameStarted = true;

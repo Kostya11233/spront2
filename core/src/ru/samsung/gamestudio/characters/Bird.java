@@ -1,7 +1,8 @@
-package ru.samsung.gamestudio;
+package ru.samsung.gamestudio.characters;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import ru.samsung.gamestudio.MyGdxGame;
 
 public class Bird {
     public boolean isGameOver;
@@ -11,7 +12,7 @@ public class Bird {
     float height;
     float speed;
     float jumpHeight;
-    final float maxHeightOfJump = 100;
+    final float maxHeightOfJump = 200;
     boolean jump;
     int frameCounter;
     Texture[] frames;

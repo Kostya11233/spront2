@@ -1,4 +1,4 @@
-package ru.samsung.gamestudio;
+package ru.samsung.gamestudio.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,11 +8,13 @@ public class Menu {
 
     Texture startTexture;
     Texture restartTexture;
-
+    Texture gameStart;
     float x, y;
     float width, height;
 
     boolean isStartVisible;
+
+
 
     public Menu(float x, float y, float width, float height) {
         this.x = x;
@@ -20,8 +22,9 @@ public class Menu {
         this.width = width;
         this.height = height;
 
-        startTexture = new Texture("start_game.png");
-        restartTexture = new Texture("stop_game.png");
+        startTexture = new Texture("restart_bg.png");
+        restartTexture = new Texture("restart_bg.png");
+
 
         isStartVisible = true;
     }
@@ -51,5 +54,6 @@ public class Menu {
     public void dispose() {
         startTexture.dispose();
         restartTexture.dispose();
+        gameStart.dispose();
     }
 }

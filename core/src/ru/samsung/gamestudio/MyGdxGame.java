@@ -3,6 +3,7 @@ package ru.samsung.gamestudio;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import ru.samsung.gamestudio.screens.ScreenGame;
 
 public class MyGdxGame extends Game {
 
