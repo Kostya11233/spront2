@@ -6,13 +6,13 @@ import ru.samsung.gamestudio.MyGdxGame;
 
 public class Bird {
     public boolean isGameOver;
-    float x;
-    float y;
-    float width;
-    float height;
+    public float x;
+    public float y;
+    public float width;
+    public float height;
     float speed;
     float jumpHeight;
-    final float maxHeightOfJump = 200;
+    final float maxHeightOfJump = 100;
     boolean jump;
     int frameCounter;
     Texture[] frames;

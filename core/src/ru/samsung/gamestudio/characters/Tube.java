@@ -17,7 +17,7 @@ public class Tube {
 
     int x, gapY;
     int distance;
-    int speed = 15;
+    int speed = 10;
     final int width = 200;
     final int height = 700;
     int gapHeight = 400;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
+import ru.samsung.gamestudio.components.Coin;
 import ru.samsung.gamestudio.components.Menu;
 import ru.samsung.gamestudio.MyGdxGame;
 import ru.samsung.gamestudio.characters.Bird;
@@ -24,20 +25,17 @@ public class ScreenGame implements Screen {
     Bird bird;
     ArrayList<Tube> tubes;
     int tubeCount = 3;
-
+    ArrayList<Coin> coins;
+    int coinScore = 0;
+    int maxCoins = 5;
     MovingBackground background;
     PointCounter pointCounter;
     Menu menu;
 
-
-    BitmapFont font;
-
     int gamePoints;
     boolean isGameStarted = false;
     boolean isGameOver = false;
-
-    final int pointCounterMarginTop = 60;
-    final int pointCounterMarginRight = 400;
+    boolean isPaused = false;
 
     public ScreenGame(MyGdxGame game) {
         this.game = game;
@@ -49,12 +47,9 @@ public class ScreenGame implements Screen {
             tubes.add(new Tube(tubeCount, i));
         }
 
-        pointCounter = new PointCounter(SCR_WIDTH - pointCounterMarginRight, SCR_HEIGHT - pointCounterMarginTop);
-        font = new BitmapFont();
+        pointCounter = new PointCounter(100, 600);
         background = new MovingBackground();
-
-        menu = new Menu(SCR_WIDTH / 10f - 200, SCR_HEIGHT / 10f - 100, 1500, 1500);
-
+        menu = new Menu();
     }
 
     @Override
@@ -62,48 +57,58 @@ public class ScreenGame implements Screen {
         if (Gdx.input.justTouched()) {
             float tx = Gdx.input.getX();
             float ty = Gdx.input.getY();
-            if (!isGameStarted) {
-                if (menu.isHit(tx, ty)) {
+
+
+            if (isPaused) {
+                if (menu.isButtonHit(tx, ty)) {
+                    isPaused = false;
+                }
+                if (menu.isExitHit(tx, ty)) {
+                    Gdx.app.exit();
+                }
+            } else if (!isGameStarted && !isGameOver) {
+                if (menu.isButtonHit(tx, ty)) {
                     isGameStarted = true;
-                    isGameOver = false;
                     gamePoints = 0;
-
                     bird = new Bird(200, 300, 10, 100, 100);
-
                     tubes = new ArrayList<>();
                     for (int i = 0; i < tubeCount; i++) {
                         tubes.add(new Tube(tubeCount, i));
                     }
+                }
+                if (menu.isExitHit(tx, ty)) {
+                    Gdx.app.exit();
                 }
             } else if (isGameOver) {
-                if (menu.isHit(tx, ty)) {
+                if (menu.isButtonHit(tx, ty)) {
                     isGameStarted = true;
                     isGameOver = false;
                     gamePoints = 0;
-
                     bird = new Bird(200, 300, 10, 100, 100);
-
                     tubes = new ArrayList<>();
                     for (int i = 0; i < tubeCount; i++) {
                         tubes.add(new Tube(tubeCount, i));
                     }
                 }
-            } else {
-                bird.onClick();
+                if (menu.isExitHit(tx, ty)) {
+                    Gdx.app.exit();
+                }
+            } else if (isGameStarted && !isGameOver && !isPaused) {
+                if (menu.isPauseHit(tx, ty)) {
+                    isPaused = true;
+                } else {
+                    bird.onClick();
+                }
             }
         }
-
-        if (isGameStarted && !isGameOver) {
+        if (isGameStarted && !isGameOver && !isPaused) {
             bird.fly();
-            for (Tube t : tubes) {
-                t.move();
-            }
+            for (Tube t : tubes) t.move();
             background.move();
 
             for (Tube t : tubes) {
                 if (t.isHit(bird)) {
                     isGameOver = true;
-                    menu.showRestart();
                 } else if (t.needAddPoint(bird)) {
                     gamePoints++;
                     t.setPointReceived();
@@ -112,31 +117,51 @@ public class ScreenGame implements Screen {
 
             if (bird.isOutOfScreen()) {
                 isGameOver = true;
-                menu.showRestart();
             }
         }
-
         ScreenUtils.clear(1, 0, 0, 1);
         game.camera.update();
         game.batch.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
-
         background.draw(game.batch);
-
-        for (Tube t : tubes) {
-            t.draw(game.batch);
-        }
+        for (Tube t : tubes) t.draw(game.batch);
         bird.draw(game.batch);
 
-        if (isGameStarted && !isGameOver) {
+        if (isGameStarted && !isGameOver && !isPaused) {
             pointCounter.draw(game.batch, gamePoints);
         }
 
-        if (!isGameStarted || isGameOver) {
-            menu.draw(game.batch);
+
+        if (isGameStarted && !isGameOver && !isPaused) {
+            menu.drawPauseButton(game.batch);
+        }
+
+        if (Gdx.input.justTouched()) {
+            float tx = Gdx.input.getX();
+            float ty = Gdx.input.getY();
+            float realY = SCR_HEIGHT - ty;
+
+
+            if (isGameStarted && !isGameOver && !isPaused) {
+                if (menu.isPauseHit(tx, ty)) {
+                }
+            }
         }
 
 
+        if (!isGameStarted) {
+            menu.setButtonText("START");
+            menu.setGamePoints(0);
+            menu.draw(game.batch);
+        } else if (isPaused) {
+            menu.setButtonText("CONTINUE");
+            menu.setGamePoints(gamePoints);
+            menu.draw(game.batch);
+        } else if (isGameOver) {
+            menu.setButtonText("RESTART");
+            menu.setGamePoints(gamePoints);
+            menu.draw(game.batch);
+        }
 
         game.batch.end();
     }
@@ -144,11 +169,8 @@ public class ScreenGame implements Screen {
     @Override
     public void dispose() {
         bird.dispose();
-        for (Tube t : tubes) {
-            t.dispose();
-        }
+        for (Tube t : tubes) t.dispose();
         pointCounter.dispose();
-        font.dispose();
         background.dispose();
         menu.dispose();
     }
@@ -156,7 +178,7 @@ public class ScreenGame implements Screen {
     @Override public void show() {
 
     }
-    @Override public void resize(int width, int height) {
+    @Override public void resize(int w, int h) {
 
     }
     @Override public void pause() {

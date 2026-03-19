@@ -25,4 +25,5 @@ public class MyGdxGame extends Game {
     public void dispose() {
         batch.dispose();
     }
+
 }

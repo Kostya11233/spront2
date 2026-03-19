@@ -9,7 +9,7 @@ public class MovingBackground {
     Texture texture;
 
     int texture1x, texture2x;
-    int speed = 4;
+    int speed = 2;
 
     public MovingBackground() {
         texture1x = 0;
