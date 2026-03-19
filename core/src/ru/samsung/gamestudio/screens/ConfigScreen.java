@@ -2,18 +2,19 @@ package ru.samsung.gamestudio.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.utils.ScreenUtils;
 import ru.samsung.gamestudio.MyGdxGame;
+import ru.samsung.gamestudio.components.MovingBackground;
 
 import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
 
 public class ConfigScreen implements Screen {
-    float btnX = 200;
-    float btnY = 150;
-    float btnW = 150;
-    float btnH = 100;
+    private final MovingBackground background;
     MyGdxGame game;
     public ConfigScreen(MyGdxGame game) {
         this.game = game;
+        background = new MovingBackground();
+
 
     }
     @Override
@@ -24,15 +25,14 @@ public class ConfigScreen implements Screen {
     @Override
     public void render(float v) {
         if (Gdx.input.justTouched()) {
-            float touchX = Gdx.input.getX();
-            float touchY = Gdx.input.getY();
-            float realY = SCR_HEIGHT - touchY;
 
-            if (touchX >= btnX && touchX <= btnX + btnW &&
-                    realY >= btnY && realY <= btnY + btnH) {
-                Gdx.app.exit();
-            }
         }
+        ScreenUtils.clear(1, 0, 0, 1);
+        game.camera.update();
+        game.batch.setProjectionMatrix(game.camera.combined);
+        game.batch.begin();
+        background.draw(game.batch);
+        game.batch.end();
     }
 
     @Override

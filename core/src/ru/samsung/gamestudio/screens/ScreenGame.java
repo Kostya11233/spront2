@@ -60,9 +60,6 @@ public class ScreenGame implements Screen {
                 if (menu.isExitHit(tx, ty)) {
                     Gdx.app.exit();
                 }
-                if (menu.isConfigHit(tx, ty)) {
-
-                }
             } else if (!isGameStarted && !isGameOver) {
                 if (menu.isButtonHit(tx, ty)) {
 
@@ -75,6 +72,10 @@ public class ScreenGame implements Screen {
                 }
                 if (menu.isExitHit(tx, ty)) {
                     Gdx.app.exit();
+                }
+
+                if (menu.isConfigHit(tx, ty)) {
+                    game.setScreen(game.configScreen);
                 }
             } else if (isGameOver) {
                 if (menu.isButtonHit(tx, ty)) {
