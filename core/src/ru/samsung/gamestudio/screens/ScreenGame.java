@@ -2,9 +2,7 @@ package ru.samsung.gamestudio.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
-import ru.samsung.gamestudio.components.Coin;
 import ru.samsung.gamestudio.components.Menu;
 import ru.samsung.gamestudio.MyGdxGame;
 import ru.samsung.gamestudio.characters.Bird;
@@ -16,7 +14,6 @@ import ru.samsung.gamestudio.components.PointCounter;
 import java.util.ArrayList;
 
 import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
-import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 
 public class ScreenGame implements Screen {
 
@@ -25,9 +22,6 @@ public class ScreenGame implements Screen {
     Bird bird;
     ArrayList<Tube> tubes;
     int tubeCount = 3;
-    ArrayList<Coin> coins;
-    int coinScore = 0;
-    int maxCoins = 5;
     MovingBackground background;
     PointCounter pointCounter;
     Menu menu;
@@ -154,7 +148,7 @@ public class ScreenGame implements Screen {
             menu.setGamePoints(0);
             menu.draw(game.batch);
         } else if (isPaused) {
-            menu.setButtonText("CONTINUE");
+            menu.setButtonText("RESUME");
             menu.setGamePoints(gamePoints);
             menu.draw(game.batch);
         } else if (isGameOver) {
