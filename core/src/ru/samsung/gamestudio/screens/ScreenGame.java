@@ -60,9 +60,12 @@ public class ScreenGame implements Screen {
                 if (menu.isExitHit(tx, ty)) {
                     Gdx.app.exit();
                 }
+                if (menu.isConfigHit(tx, ty)) {
+
+                }
             } else if (!isGameStarted && !isGameOver) {
                 if (menu.isButtonHit(tx, ty)) {
-                    isGameStarted = true;
+
                     gamePoints = 0;
                     bird = new Bird(200, 300, 10, 100, 100);
                     tubes = new ArrayList<>();
@@ -77,7 +80,6 @@ public class ScreenGame implements Screen {
                 if (menu.isButtonHit(tx, ty)) {
                     isGameStarted = true;
                     isGameOver = false;
-                    gamePoints = 0;
                     bird = new Bird(200, 300, 10, 100, 100);
                     tubes = new ArrayList<>();
                     for (int i = 0; i < tubeCount; i++) {
@@ -143,6 +145,7 @@ public class ScreenGame implements Screen {
         }
 
 
+
         if (!isGameStarted) {
             menu.setButtonText("START");
             menu.setGamePoints(0);
@@ -156,6 +159,7 @@ public class ScreenGame implements Screen {
             menu.setGamePoints(gamePoints);
             menu.draw(game.batch);
         }
+
 
         game.batch.end();
     }

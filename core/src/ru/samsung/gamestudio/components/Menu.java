@@ -4,9 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
+
 import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
@@ -26,13 +25,10 @@ public class Menu {
     public Menu() {
         bgTexture = new Texture("restart_bg.png");
         buttonTexture = new Texture("button_bg.png");
-
         font = new BitmapFont();
         font.getData().setScale(3f);
         font.setColor(Color.WHITE);
-
         layout = new GlyphLayout();
-
         buttonW = 400;
         buttonH = 150;
         buttonX = SCR_WIDTH / 2f - buttonW / 2f;
@@ -63,9 +59,18 @@ public class Menu {
         return touchX >= SCR_WIDTH - 200 && touchX <= SCR_WIDTH - 50 &&
                 realY >= SCR_HEIGHT - 150 && realY <= SCR_HEIGHT - 50;
     }
+    public boolean isConfigHit(float tx, float ty) {
+        float realY = SCR_HEIGHT - ty;
+        return tx >= buttonX && tx <= buttonX + buttonW &&
+                realY >= buttonY && realY <= buttonY + buttonH;
+    }
+
+    public void config(Batch batch) {
+        batch.draw(buttonTexture, SCR_WIDTH - 200, SCR_HEIGHT - 150, 150, 100);
+        font.draw(batch, "CONFIG", SCR_WIDTH - 180, SCR_HEIGHT - 80);
+    }
 
     public void draw(Batch batch) {
-        // Фон
         batch.draw(bgTexture, 0, 0, SCR_WIDTH, SCR_HEIGHT);
 
 
@@ -79,13 +84,20 @@ public class Menu {
             font.draw(batch, buttonText, textX, textY);
         }
 
-
-        if (gamePoints > 0) {
+        if (gamePoints >= 0) {
             String scoreText = "SCORE: " + gamePoints;
             layout.setText(font, scoreText);
             float scoreX = SCR_WIDTH / 2f - layout.width / 2f;
             float scoreY = buttonY - 30;
             font.draw(batch, scoreText, scoreX, scoreY);
+        }
+        if (gamePoints >= 0) {
+            String config = "CONFIG";
+            layout.setText(font, config);
+            float configX = SCR_WIDTH / 5f - layout.width / 2f;
+            float configY = buttonY - -340;
+            batch.draw(buttonTexture, 140, 550, 240, 100);
+            font.draw(batch, config, configX, configY);
         }
 
 
