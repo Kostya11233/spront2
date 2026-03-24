@@ -1,13 +1,13 @@
 package ru.samsung.gamestudio.components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
-import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+
+import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
+import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 
 public class Menu {
 
@@ -23,8 +23,8 @@ public class Menu {
     int gamePoints;
 
     public Menu() {
-        bgTexture = new Texture("restart_bg.png");
-        buttonTexture = new Texture("button_bg.png");
+        Texture bgTexture = new Texture("restart_bg.png");
+        Texture buttonTexture = new Texture("button_bg.png");
         font = new BitmapFont();
         font.getData().setScale(3f);
         font.setColor(Color.WHITE);
@@ -63,11 +63,6 @@ public class Menu {
         float realY = SCR_HEIGHT - ty;
         return tx >= buttonX && tx <= buttonX + buttonW &&
                 realY >= buttonY && realY <= buttonY + buttonH;
-    }
-
-    public void config(Batch batch) {
-        batch.draw(buttonTexture, SCR_WIDTH - 200, SCR_HEIGHT - 150, 150, 100);
-        font.draw(batch, "CONFIG", SCR_WIDTH - 180, SCR_HEIGHT - 80);
     }
 
     public void draw(Batch batch) {
