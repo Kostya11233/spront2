@@ -58,7 +58,7 @@ public class Buton {
         textX = x + (buttonWidth - textWidth) / 2;
         textY = y + (buttonHeight + textHeight) / 2;
     }
-
+//f
     public void draw(SpriteBatch batch) {
         batch.draw(texture, x, y, buttonWidth, buttonHeight);
         font.draw(batch, text, textX, textY);
