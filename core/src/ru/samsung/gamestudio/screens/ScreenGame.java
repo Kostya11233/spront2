@@ -2,6 +2,7 @@ package ru.samsung.gamestudio.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
 import ru.samsung.gamestudio.components.Menu;
 import ru.samsung.gamestudio.MyGdxGame;
@@ -10,23 +11,25 @@ import ru.samsung.gamestudio.characters.Tube;
 import ru.samsung.gamestudio.components.MovingBackground;
 import ru.samsung.gamestudio.components.PointCounter;
 
-
 import java.util.ArrayList;
 
 import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
+import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 
 public class ScreenGame implements Screen {
-
+    // tckt 'nf cjj,otybt tcnm nj z gbljhfc
     MyGdxGame game;
-
     Bird bird;
     ArrayList<Tube> tubes;
     int tubeCount = 3;
     MovingBackground background;
     PointCounter pointCounter;
     Menu menu;
+    BitmapFont font;
 
     int gamePoints;
+    int lives = 1;
+    int nextLifeAt = 10;
     boolean isGameStarted = false;
     boolean isGameOver = false;
     boolean isPaused = false;
@@ -44,14 +47,16 @@ public class ScreenGame implements Screen {
         pointCounter = new PointCounter(100, 600);
         background = new MovingBackground();
         menu = new Menu();
+        font = new BitmapFont();
+        font.getData().setScale(2f);
     }
 
     @Override
     public void render(float delta) {
+        // ===== ОБРАБОТКА НАЖАТИЙ =====
         if (Gdx.input.justTouched()) {
             float tx = Gdx.input.getX();
             float ty = Gdx.input.getY();
-
 
             if (isPaused) {
                 if (menu.isButtonHit(tx, ty)) {
@@ -62,8 +67,10 @@ public class ScreenGame implements Screen {
                 }
             } else if (!isGameStarted && !isGameOver) {
                 if (menu.isButtonHit(tx, ty)) {
-
+                    isGameStarted = true;
                     gamePoints = 0;
+                    lives = 1;
+                    nextLifeAt = 10;
                     bird = new Bird(200, 300, 10, 100, 100);
                     tubes = new ArrayList<>();
                     for (int i = 0; i < tubeCount; i++) {
@@ -73,14 +80,13 @@ public class ScreenGame implements Screen {
                 if (menu.isExitHit(tx, ty)) {
                     Gdx.app.exit();
                 }
-
-                if (menu.isConfigHit(tx, ty)) {
-                    game.setScreen(game.configScreen);
-                }
             } else if (isGameOver) {
                 if (menu.isButtonHit(tx, ty)) {
                     isGameStarted = true;
                     isGameOver = false;
+                    gamePoints = 0;
+                    lives = 1;
+                    nextLifeAt = 10;
                     bird = new Bird(200, 300, 10, 100, 100);
                     tubes = new ArrayList<>();
                     for (int i = 0; i < tubeCount; i++) {
@@ -98,6 +104,8 @@ public class ScreenGame implements Screen {
                 }
             }
         }
+
+        // ===== ЛОГИКА ИГРЫ =====
         if (isGameStarted && !isGameOver && !isPaused) {
             bird.fly();
             for (Tube t : tubes) t.move();
@@ -105,10 +113,25 @@ public class ScreenGame implements Screen {
 
             for (Tube t : tubes) {
                 if (t.isHit(bird)) {
-                    isGameOver = true;
+                    lives--;
+                    if (lives <= 0) {
+                        isGameOver = true;
+                    } else {
+                        bird = new Bird(200, 300, 10, 100, 100);
+                        tubes = new ArrayList<>();
+                        for (int i = 0; i < tubeCount; i++) {
+                            tubes.add(new Tube(tubeCount, i));
+                        }
+                    }
+                    break;
                 } else if (t.needAddPoint(bird)) {
                     gamePoints++;
                     t.setPointReceived();
+
+                    if (gamePoints >= nextLifeAt) {
+                        lives++;
+                        nextLifeAt += 10;
+                    }
                 }
             }
 
@@ -116,36 +139,25 @@ public class ScreenGame implements Screen {
                 isGameOver = true;
             }
         }
+
+        // ===== ОТРИСОВКА =====
         ScreenUtils.clear(1, 0, 0, 1);
         game.camera.update();
         game.batch.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
+
         background.draw(game.batch);
         for (Tube t : tubes) t.draw(game.batch);
         bird.draw(game.batch);
 
         if (isGameStarted && !isGameOver && !isPaused) {
             pointCounter.draw(game.batch, gamePoints);
+            font.draw(game.batch, "LIVES: " + lives, 50, SCR_HEIGHT - 50);
         }
-
 
         if (isGameStarted && !isGameOver && !isPaused) {
             menu.drawPauseButton(game.batch);
         }
-
-        if (Gdx.input.justTouched()) {
-            float tx = Gdx.input.getX();
-            float ty = Gdx.input.getY();
-            float realY = SCR_HEIGHT - ty;
-
-
-            if (isGameStarted && !isGameOver && !isPaused) {
-                if (menu.isPauseHit(tx, ty)) {
-                }
-            }
-        }
-
-
 
         if (!isGameStarted) {
             menu.setButtonText("START");
@@ -161,7 +173,6 @@ public class ScreenGame implements Screen {
             menu.draw(game.batch);
         }
 
-
         game.batch.end();
     }
 
@@ -172,21 +183,12 @@ public class ScreenGame implements Screen {
         pointCounter.dispose();
         background.dispose();
         menu.dispose();
+        font.dispose();
     }
 
-    @Override public void show() {
-
-    }
-    @Override public void resize(int w, int h) {
-
-    }
-    @Override public void pause() {
-
-    }
-    @Override public void resume() {
-
-    }
-    @Override public void hide() {
-
-    }
+    @Override public void show() {}
+    @Override public void resize(int w, int h) {}
+    @Override public void pause() {}
+    @Override public void resume() {}
+    @Override public void hide() {}
 }

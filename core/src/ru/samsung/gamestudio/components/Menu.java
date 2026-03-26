@@ -59,16 +59,8 @@ public class Menu {
         return touchX >= SCR_WIDTH - 200 && touchX <= SCR_WIDTH - 50 &&
                 realY >= SCR_HEIGHT - 150 && realY <= SCR_HEIGHT - 50;
     }
-    public boolean isConfigHit(float tx, float ty) {
-        float realY = SCR_HEIGHT - ty;
-        return tx >= buttonX && tx <= buttonX + buttonW &&
-                realY >= buttonY && realY <= buttonY + buttonH;
-    }
 
-    public void config(Batch batch) {
-        batch.draw(buttonTexture, SCR_WIDTH - 200, SCR_HEIGHT - 150, 150, 100);
-        font.draw(batch, "CONFIG", SCR_WIDTH - 180, SCR_HEIGHT - 80);
-    }
+
 
     public void draw(Batch batch) {
         batch.draw(bgTexture, 0, 0, SCR_WIDTH, SCR_HEIGHT);
@@ -90,14 +82,6 @@ public class Menu {
             float scoreX = SCR_WIDTH / 2f - layout.width / 2f;
             float scoreY = buttonY - 30;
             font.draw(batch, scoreText, scoreX, scoreY);
-        }
-        if (gamePoints >= 0) {
-            String config = "CONFIG";
-            layout.setText(font, config);
-            float configX = SCR_WIDTH / 5f - layout.width / 2f;
-            float configY = buttonY - -340;
-            batch.draw(buttonTexture, 140, 550, 240, 100);
-            font.draw(batch, config, configX, configY);
         }
 
 
