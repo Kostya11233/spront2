@@ -8,28 +8,30 @@ import ru.samsung.gamestudio.Buton;
 import ru.samsung.gamestudio.MyGdxGame;
 import ru.samsung.gamestudio.components.MovingBackground;
 
-public class ScreenRestart implements Screen {
+public class MenuScreen implements Screen {
     private MovingBackground background;
-    private Buton buttonRestart;
+    private Buton buttonStart;
     private Buton buttonExit;
     MyGdxGame myGdxGame;
-    public ScreenRestart(MyGdxGame myGdxGame) {
+
+    public MenuScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        buttonRestart = new Buton(440, 400, "RESTART");
-        buttonExit = new Buton(540, 250, "EXIT");
+        buttonStart = new Buton(440, 400, "START");
+        buttonExit = new Buton(450, 250, "EXIT");
         background = new MovingBackground("restart_bg.png");
+
     }
 
     @Override
     public void render(float delta) {
         if (Gdx.input.isTouched()) {
             Vector3 touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (buttonRestart.isHit((int) touch.x, (int) touch.y)) {
-                myGdxGame.setScreen(myGdxGame.screenGame);
+            if (buttonStart.isHit((int) touch.x, (int) touch.y)) {
+                myGdxGame.setScreen((myGdxGame.screenGame));
                 return;
             }
             if (buttonExit.isHit((int) touch.x, (int) touch.y)) {
-                myGdxGame.setScreen(myGdxGame.menuScreen);
+                myGdxGame.setScreen((myGdxGame.menuScreen));
                 return;
             }
         }
@@ -40,7 +42,7 @@ public class ScreenRestart implements Screen {
         myGdxGame.batch.begin();
 
         background.draw(myGdxGame.batch);
-        buttonRestart.draw(myGdxGame.batch);
+        buttonStart.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
 
         myGdxGame.batch.end();
@@ -49,7 +51,7 @@ public class ScreenRestart implements Screen {
     @Override
     public void dispose() {
         background.dispose();
-        buttonRestart.dispose();
+        buttonStart.dispose();
         buttonExit.dispose();
     }
 

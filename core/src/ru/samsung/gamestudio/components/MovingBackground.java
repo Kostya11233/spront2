@@ -6,7 +6,8 @@ import ru.samsung.gamestudio.MyGdxGame;
 
 public class MovingBackground {
     Texture texture;
-    int texture1x, texture2x;
+    int texture1x;
+    int texture2x;
     int speed = 2;
 
     public MovingBackground() {

@@ -26,9 +26,9 @@ public class ScreenGame implements Screen {
     PointCounter pointCounter;
     BitmapFont font;
     Buton menuButton;
-
+    MyGdxGame restart;
     public int gamePoints;
-    public boolean isGameOver = false;
+    public static boolean isGameOver = false;
     int lives = 1;
     int nextLifeAt = 10;
 
@@ -40,8 +40,8 @@ public class ScreenGame implements Screen {
         font = new BitmapFont();
         font.getData().setScale(2f);
 
-        // Кнопка MENU — маленькая, в правом верхнем углу
-        menuButton = new Buton(SCR_WIDTH - 120, SCR_HEIGHT - 80, 100, 60, "MENU");
+        menuButton = new Buton(SCR_WIDTH - 350, SCR_HEIGHT - 120, 250, 100, "MENU");
+
     }
 
     public void initGame() {
@@ -58,55 +58,47 @@ public class ScreenGame implements Screen {
 
     @Override
     public void render(float delta) {
-        // Проверка нажатия на кнопку MENU
+
         if (Gdx.input.justTouched()) {
             float tx = Gdx.input.getX();
             float ty = Gdx.input.getY();
             float realY = SCR_HEIGHT - ty;
             if (menuButton.isHit((int) tx, (int) realY)) {
-                game.setScreen(new ConfigScreen(game));
+                game.setScreen(game.resumeScreen);
                 return;
             }
-        }
-
-        if (Gdx.input.justTouched() && !isGameOver) {
             bird.onClick();
         }
 
-        if (!isGameOver) {
-            bird.fly();
-            for (Tube t : tubes) t.move();
-            bg.move();
-
-            for (Tube t : tubes) {
-                if (t.isHit(bird)) {
-                    lives--;
-                    if (lives <= 0) {
-                        isGameOver = true;
-                    } else {
-                        bird = new Bird(200, 300, 10, 100, 100);
-                        initTubes();
-                    }
-                    break;
-                } else if (t.needAddPoint(bird)) {
-                    gamePoints++;
-                    t.setPointReceived();
-                    if (gamePoints >= nextLifeAt) {
-                        lives++;
-                        nextLifeAt += 10;
-                    }
-                }
-            }
-            if (bird.isOutOfScreen()) isGameOver = true;
-        }
-
-
         if (isGameOver) {
-            if (Gdx.input.justTouched()) {
-                game.setScreen(new ScreenRestart(game));
-            }
+            game.setScreen(game.resumeScreen);
             return;
         }
+        bird.fly();
+        for (Tube t : tubes) t.move();
+        bg.move();
+
+        for (Tube t : tubes) {
+            if (t.isHit(bird)) {
+                lives--;
+                if (lives <= 0) {
+                    isGameOver = true;
+                } else {
+                    bird = new Bird(200, 300, 10, 100, 100);
+                    initTubes();
+                }
+                break;
+            } else if (t.needAddPoint(bird)) {
+                gamePoints++;
+                t.setPointReceived();
+                if (gamePoints >= nextLifeAt) {
+                    lives++;
+                    nextLifeAt += 10;
+                }
+            }
+        }
+        if (bird.isOutOfScreen()) isGameOver = true;
+
 
         ScreenUtils.clear(1, 0, 0, 1);
         game.camera.update();
@@ -136,9 +128,28 @@ public class ScreenGame implements Screen {
         menuButton.dispose();
     }
 
-    @Override public void show() {}
-    @Override public void resize(int w, int h) {}
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void resize(int w, int h) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
 }

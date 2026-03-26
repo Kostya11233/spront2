@@ -9,7 +9,7 @@ public class PointCounter {
     int x;
     int y;
     BitmapFont font;
-
+    int points = 0;
     public PointCounter(int x, int y) {
         this.x = x;
         this.y = y;
@@ -20,7 +20,7 @@ public class PointCounter {
     }
 
     public void draw(Batch batch, int points) {
-        font.draw(batch, "COUNT: " + points, x, y);
+        font.draw(batch, "SCORE: " + points, x, y);
 
 
     }

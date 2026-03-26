@@ -15,7 +15,7 @@ public class Buton {
     int buttonWidth, buttonHeight;
     int textWidth, textHeight;
 
-    // Конструктор с автоматическим размером (по размеру текстуры)
+
     public Buton(int x, int y, String text) {
         this.text = text;
         this.x = x;
@@ -37,7 +37,7 @@ public class Buton {
         textY = y + (buttonHeight + textHeight) / 2;
     }
 
-    // Конструктор с заданным размером
+
     public Buton(int x, int y, int width, int height, String text) {
         this.text = text;
         this.x = x;

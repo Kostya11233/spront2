@@ -8,29 +8,34 @@ import ru.samsung.gamestudio.Buton;
 import ru.samsung.gamestudio.MyGdxGame;
 import ru.samsung.gamestudio.components.MovingBackground;
 
-public class ConfigScreen implements Screen {
+public class ResumeScreen implements Screen {
     private MovingBackground background;
-    private Buton buttonStart;
+    private Buton buttonRestart;
     private Buton buttonExit;
     MyGdxGame myGdxGame;
-
-    public ConfigScreen(MyGdxGame myGdxGame) {
+    public ResumeScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        buttonStart = new Buton(440, 400, "START");
-        buttonExit = new Buton(540, 250, "EXIT");
+        buttonRestart = new Buton(440, 400, "RESUME");
+        buttonExit = new Buton(540, 250, "EXIT MENU");
         background = new MovingBackground("restart_bg.png");
     }
 
     @Override
-    public void render(float delta) {
+    public void show() {
+    }
+
+    @Override
+    public void render(float v) {
         if (Gdx.input.isTouched()) {
             Vector3 touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (buttonStart.isHit((int) touch.x, (int) touch.y)) {
-                myGdxGame.setScreen(new ScreenGame(myGdxGame));
+            if (buttonRestart.isHit((int) touch.x, (int) touch.y)) {
+
+                myGdxGame.setScreen(myGdxGame.screenGame);
                 return;
             }
             if (buttonExit.isHit((int) touch.x, (int) touch.y)) {
-                Gdx.app.exit();
+
+                myGdxGame.setScreen(myGdxGame.menuScreen);
                 return;
             }
         }
@@ -41,22 +46,37 @@ public class ConfigScreen implements Screen {
         myGdxGame.batch.begin();
 
         background.draw(myGdxGame.batch);
-        buttonStart.draw(myGdxGame.batch);
+        buttonRestart.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
 
         myGdxGame.batch.end();
     }
 
     @Override
+    public void resize(int i, int i1) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
     public void dispose() {
         background.dispose();
-        buttonStart.dispose();
+        buttonRestart.dispose();
         buttonExit.dispose();
     }
 
-    @Override public void show() {}
-    @Override public void resize(int i, int i1) {}
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
 }

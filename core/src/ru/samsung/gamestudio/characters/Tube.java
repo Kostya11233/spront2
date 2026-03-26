@@ -1,12 +1,12 @@
 package ru.samsung.gamestudio.characters;
 
-import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
-import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.Random;
+
+import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
+import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 
 public class Tube {
 
@@ -18,7 +18,7 @@ public class Tube {
     int x;
     int gapY;
     int distance;
-    int speed = 10;
+    int speed = 7;
     final int width = 200;
     final int height = 700;
     int gapHeight = 400;

@@ -12,7 +12,7 @@ public class Bird {
     public float height;
     float speed;
     float jumpHeight;
-    final float maxHeightOfJump = 200;
+    final float maxHeightOfJump = 167;
     boolean jump;
     int frameCounter;
     Texture[] frames;
