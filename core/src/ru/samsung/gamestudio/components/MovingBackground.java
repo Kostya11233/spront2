@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.samsung.gamestudio.MyGdxGame;
 
 public class MovingBackground {
-
     Texture texture;
-
     int texture1x;
     int texture2x;
     int speed = 2;
@@ -18,16 +16,17 @@ public class MovingBackground {
         texture = new Texture("game_bg.png");
     }
 
+    public MovingBackground(String imagePath) {
+        texture1x = 0;
+        texture2x = MyGdxGame.SCR_WIDTH;
+        texture = new Texture(imagePath);
+    }
+
     public void move() {
         texture1x -= speed;
         texture2x -= speed;
-
-        if (texture1x <= -MyGdxGame.SCR_WIDTH) {
-            texture1x = MyGdxGame.SCR_WIDTH;
-        }
-        if (texture2x <= -MyGdxGame.SCR_WIDTH) {
-            texture2x = MyGdxGame.SCR_WIDTH;
-        }
+        if (texture1x <= -MyGdxGame.SCR_WIDTH) texture1x = MyGdxGame.SCR_WIDTH;
+        if (texture2x <= -MyGdxGame.SCR_WIDTH) texture2x = MyGdxGame.SCR_WIDTH;
     }
 
     public void draw(Batch batch) {

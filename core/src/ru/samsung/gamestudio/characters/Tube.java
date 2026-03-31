@@ -1,20 +1,18 @@
 package ru.samsung.gamestudio.characters;
 
-import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
-import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.Random;
 
+import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
+import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
+
 public class Tube {
 
     Texture top;
     Texture bottom;
-
     Random random;
-
     int x;
     int gapY;
     int distance;
