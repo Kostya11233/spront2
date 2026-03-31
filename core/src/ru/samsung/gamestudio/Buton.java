@@ -14,7 +14,6 @@ public class Buton {
     int textX, textY;
     int buttonWidth, buttonHeight;
     int textWidth, textHeight;
-
     public Buton(int x, int y, String text) {
         this.text = text;
         this.x = x;

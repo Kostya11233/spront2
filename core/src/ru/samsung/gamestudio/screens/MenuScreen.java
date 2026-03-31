@@ -13,7 +13,6 @@ public class MenuScreen implements Screen {
     private Buton buttonStart;
     private Buton buttonExit;
     MyGdxGame myGdxGame;
-
     public MenuScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         buttonStart = new Buton(490, 400, 300, 120, "START");

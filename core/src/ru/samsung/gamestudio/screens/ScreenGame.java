@@ -113,7 +113,7 @@ public class ScreenGame implements Screen {
         for (Tube t : tubes) t.draw(game.batch);
         bird.draw(game.batch);
         pointCounter.draw(game.batch, gamePoints);
-        font.draw(game.batch, "LIVES: " + lives, 50, SCR_HEIGHT - 50);
+        font.draw(game.batch, "LIVES: " + lives, 100, SCR_HEIGHT - 50);
         menuButton.draw(game.batch);
         game.batch.end();
     }
