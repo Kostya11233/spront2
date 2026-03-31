@@ -13,16 +13,13 @@ public class PointCounter {
     public PointCounter(int x, int y) {
         this.x = x;
         this.y = y;
-
         font = new BitmapFont();
-        font.getData().setScale(5f);
+        font.getData().setScale(4f);
         font.setColor(Color.WHITE);
     }
 
     public void draw(Batch batch, int points) {
         font.draw(batch, "SCORE: " + points, x, y);
-
-
     }
 
     public void dispose() {

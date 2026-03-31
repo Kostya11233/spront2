@@ -16,9 +16,8 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        // Кнопки по центру
         buttonStart = new Buton(490, 400, 300, 120, "START");
-        buttonExit = new Buton(540, 250, 200, 80, "EXIT");
+        buttonExit = new Buton(100, 100, 200, 80, "EXIT");
         background = new MovingBackground("restart_bg.png");
     }
 
@@ -36,16 +35,13 @@ public class MenuScreen implements Screen {
                 return;
             }
         }
-
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();
-
         background.draw(myGdxGame.batch);
         buttonStart.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
-
         myGdxGame.batch.end();
     }
 

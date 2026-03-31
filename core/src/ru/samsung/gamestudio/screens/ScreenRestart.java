@@ -20,11 +20,9 @@ public class ScreenRestart implements Screen {
     public ScreenRestart(MyGdxGame myGdxGame, int score) {
         this.myGdxGame = myGdxGame;
         this.lastScore = score;
-
         buttonRestart = new Buton(490, 400, 300, 110, "RESTART");
-        buttonExit = new Buton(540, 250, 200, 80, "EXIT MENU");
+        buttonExit = new Buton(100, 100, 400, 80, "EXIT MENU");
         background = new MovingBackground("restart_bg.png");
-
         font = new BitmapFont();
         font.getData().setScale(4f);
     }
@@ -49,13 +47,10 @@ public class ScreenRestart implements Screen {
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();
-
         background.draw(myGdxGame.batch);
         buttonRestart.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
-
         font.draw(myGdxGame.batch, "SCORE: " + lastScore, MyGdxGame.SCR_WIDTH / 2f - 100, MyGdxGame.SCR_HEIGHT - 150);
-
         myGdxGame.batch.end();
     }
 
@@ -67,9 +62,19 @@ public class ScreenRestart implements Screen {
         font.dispose();
     }
 
-    @Override public void show() {}
-    @Override public void resize(int i, int i1) {}
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
+    @Override public void show() {
+
+    }
+    @Override public void resize(int i, int i1) {
+
+    }
+    @Override public void pause() {
+
+    }
+    @Override public void resume() {
+
+    }
+    @Override public void hide() {
+
+    }
 }

@@ -12,10 +12,8 @@ public class MyGdxGame extends Game {
 
     public SpriteBatch batch;
     public OrthographicCamera camera;
-
     public static final int SCR_WIDTH = 1280;
     public static final int SCR_HEIGHT = 720;
-
     public MenuScreen menuScreen;
     public ResumeScreen resumeScreen;
     public ScreenGame screenGame;
@@ -26,13 +24,10 @@ public class MyGdxGame extends Game {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, SCR_WIDTH, SCR_HEIGHT);
-
         menuScreen = new MenuScreen(this);
         resumeScreen = new ResumeScreen(this);
         screenGame = new ScreenGame(this);
         screenRestart = new ScreenRestart(this, 0);
-
-
         setScreen(menuScreen);
     }
 

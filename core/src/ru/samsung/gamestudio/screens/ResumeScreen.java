@@ -13,11 +13,10 @@ public class ResumeScreen implements Screen {
     private Buton buttonResume;
     private Buton buttonExit;
     MyGdxGame myGdxGame;
-
     public ResumeScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         buttonResume = new Buton(490, 400, 300, 110, "RESUME");
-        buttonExit = new Buton(540, 250, 200, 80, "EXIT MENU");
+        buttonExit = new Buton(100, 100, 400, 80, "EXIT MENU");
         background = new MovingBackground("restart_bg.png");
     }
 
@@ -30,7 +29,6 @@ public class ResumeScreen implements Screen {
                 return;
             }
             if (buttonExit.isHit((int) touch.x, (int) touch.y)) {
-                // СОЗДАЁМ НОВОЕ МЕНЮ (как в ScreenRestart)
                 myGdxGame.menuScreen = new MenuScreen(myGdxGame);
                 myGdxGame.setScreen(myGdxGame.menuScreen);
                 return;
@@ -41,11 +39,9 @@ public class ResumeScreen implements Screen {
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();
-
         background.draw(myGdxGame.batch);
         buttonResume.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
-
         myGdxGame.batch.end();
     }
 
@@ -56,9 +52,19 @@ public class ResumeScreen implements Screen {
         buttonExit.dispose();
     }
 
-    @Override public void show() {}
-    @Override public void resize(int i, int i1) {}
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
+    @Override public void show() {
+
+    }
+    @Override public void resize(int i, int i1) {
+
+    }
+    @Override public void pause() {
+
+    }
+    @Override public void resume() {
+
+    }
+    @Override public void hide() {
+
+    }
 }

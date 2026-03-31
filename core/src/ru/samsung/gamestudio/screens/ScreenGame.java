@@ -38,7 +38,7 @@ public class ScreenGame implements Screen {
         pointCounter = new PointCounter(100, 600);
         bg = new MovingBackground();
         font = new BitmapFont();
-        font.getData().setScale(2f);
+        font.getData().setScale(4f);
         menuButton = new Buton(SCR_WIDTH - 200, SCR_HEIGHT - 100, 180, 70, "MENU");
     }
 
@@ -105,21 +105,16 @@ public class ScreenGame implements Screen {
             }
         }
         if (bird.isOutOfScreen()) isGameOver = true;
-
-
         ScreenUtils.clear(1, 0, 0, 1);
         game.camera.update();
         game.batch.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
-
         bg.draw(game.batch);
         for (Tube t : tubes) t.draw(game.batch);
         bird.draw(game.batch);
-
         pointCounter.draw(game.batch, gamePoints);
         font.draw(game.batch, "LIVES: " + lives, 50, SCR_HEIGHT - 50);
         menuButton.draw(game.batch);
-
         game.batch.end();
     }
 
@@ -133,9 +128,18 @@ public class ScreenGame implements Screen {
         menuButton.dispose();
     }
 
-    @Override public void show() {}
-    @Override public void resize(int w, int h) {}
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
+    @Override public void show() {
+
+    }
+    @Override public void resize(int w, int h) {
+    }
+    @Override public void pause() {
+
+    }
+    @Override public void resume() {
+
+    }
+    @Override public void hide() {
+
+    }
 }

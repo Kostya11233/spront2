@@ -12,13 +12,11 @@ public class Tube {
 
     Texture top;
     Texture bottom;
-
     Random random;
-
     int x;
     int gapY;
     int distance;
-    int speed = 7;
+    int speed = 10;
     final int width = 200;
     final int height = 700;
     int gapHeight = 400;
