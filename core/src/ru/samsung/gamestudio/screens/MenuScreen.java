@@ -16,10 +16,10 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        buttonStart = new Buton(440, 400, "START");
-        buttonExit = new Buton(450, 250, "EXIT");
+        // Кнопки по центру
+        buttonStart = new Buton(490, 400, 300, 120, "START");
+        buttonExit = new Buton(540, 250, 200, 80, "EXIT");
         background = new MovingBackground("restart_bg.png");
-
     }
 
     @Override
@@ -27,11 +27,12 @@ public class MenuScreen implements Screen {
         if (Gdx.input.isTouched()) {
             Vector3 touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (buttonStart.isHit((int) touch.x, (int) touch.y)) {
-                myGdxGame.setScreen((myGdxGame.screenGame));
+                myGdxGame.screenGame = new ScreenGame(myGdxGame);
+                myGdxGame.setScreen(myGdxGame.screenGame);
                 return;
             }
             if (buttonExit.isHit((int) touch.x, (int) touch.y)) {
-                myGdxGame.setScreen((myGdxGame.menuScreen));
+                Gdx.app.exit();
                 return;
             }
         }

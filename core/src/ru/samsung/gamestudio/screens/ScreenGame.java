@@ -26,9 +26,9 @@ public class ScreenGame implements Screen {
     PointCounter pointCounter;
     BitmapFont font;
     Buton menuButton;
-    MyGdxGame restart;
+
     public int gamePoints;
-    public static boolean isGameOver = false;
+    public boolean isGameOver = false;
     int lives = 1;
     int nextLifeAt = 10;
 
@@ -39,9 +39,7 @@ public class ScreenGame implements Screen {
         bg = new MovingBackground();
         font = new BitmapFont();
         font.getData().setScale(2f);
-
-        menuButton = new Buton(SCR_WIDTH - 350, SCR_HEIGHT - 120, 250, 100, "MENU");
-
+        menuButton = new Buton(SCR_WIDTH - 200, SCR_HEIGHT - 100, 180, 70, "MENU");
     }
 
     public void initGame() {
@@ -63,17 +61,26 @@ public class ScreenGame implements Screen {
             float tx = Gdx.input.getX();
             float ty = Gdx.input.getY();
             float realY = SCR_HEIGHT - ty;
+
+
             if (menuButton.isHit((int) tx, (int) realY)) {
                 game.setScreen(game.resumeScreen);
                 return;
             }
-            bird.onClick();
+
+
+            if (!isGameOver) {
+                bird.onClick();
+            }
         }
 
         if (isGameOver) {
-            game.setScreen(game.resumeScreen);
+            game.screenRestart = new ScreenRestart(game, gamePoints);
+            game.setScreen(game.screenRestart);
             return;
         }
+
+
         bird.fly();
         for (Tube t : tubes) t.move();
         bg.move();
@@ -111,8 +118,6 @@ public class ScreenGame implements Screen {
 
         pointCounter.draw(game.batch, gamePoints);
         font.draw(game.batch, "LIVES: " + lives, 50, SCR_HEIGHT - 50);
-
-
         menuButton.draw(game.batch);
 
         game.batch.end();
@@ -128,28 +133,9 @@ public class ScreenGame implements Screen {
         menuButton.dispose();
     }
 
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void resize(int w, int h) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
+    @Override public void show() {}
+    @Override public void resize(int w, int h) {}
+    @Override public void pause() {}
+    @Override public void resume() {}
+    @Override public void hide() {}
 }
