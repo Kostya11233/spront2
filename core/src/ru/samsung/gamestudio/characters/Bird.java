@@ -16,6 +16,7 @@ public class Bird {
     boolean jump;
     int frameCounter;
     Texture[] frames;
+
     public Bird(float x, float y, float speed, float width, float height) {
         this.x = x;
         this.y = y;
