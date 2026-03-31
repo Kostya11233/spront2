@@ -14,25 +14,19 @@ public class Buton {
     int textX, textY;
     int buttonWidth, buttonHeight;
     int textWidth, textHeight;
-
-
     public Buton(int x, int y, String text) {
         this.text = text;
         this.x = x;
         this.y = y;
-
         font = new BitmapFont();
         font.getData().scale(5f);
         font.setColor(Color.WHITE);
-
         GlyphLayout gl = new GlyphLayout(font, text);
         textWidth = (int) gl.width;
         textHeight = (int) gl.height;
-
         texture = new Texture("button_bg.png");
         buttonWidth = texture.getWidth();
         buttonHeight = texture.getHeight();
-
         textX = x + (buttonWidth - textWidth) / 2;
         textY = y + (buttonHeight + textHeight) / 2;
     }

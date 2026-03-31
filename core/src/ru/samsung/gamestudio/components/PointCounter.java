@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class PointCounter {
-
     int x;
     int y;
     BitmapFont font;
@@ -14,14 +13,12 @@ public class PointCounter {
         this.x = x;
         this.y = y;
         font = new BitmapFont();
-        font.getData().setScale(4f);
+        font.getData().setScale(3f);
         font.setColor(Color.WHITE);
     }
-
     public void draw(Batch batch, int points) {
         font.draw(batch, "SCORE: " + points, x, y);
     }
-
     public void dispose() {
         font.dispose();
     }

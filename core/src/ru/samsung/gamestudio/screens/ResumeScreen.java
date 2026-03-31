@@ -34,7 +34,6 @@ public class ResumeScreen implements Screen {
                 return;
             }
         }
-
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
@@ -51,18 +50,13 @@ public class ResumeScreen implements Screen {
         buttonResume.dispose();
         buttonExit.dispose();
     }
-
     @Override public void show() {
-
     }
     @Override public void resize(int i, int i1) {
-
     }
     @Override public void pause() {
-
     }
     @Override public void resume() {
-
     }
     @Override public void hide() {
 
