@@ -49,8 +49,6 @@ public class Bird {
             y = 0;
             jump = false;
         }
-
-
     }
 
     public void draw(Batch batch) {
