@@ -3,6 +3,7 @@ package ru.samsung.gamestudio.characters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.samsung.gamestudio.MyGdxGame;
+import ru.samsung.gamestudio.screens.SkinsScreen;
 
 public class Bird {
     public boolean isGameOver;
@@ -16,7 +17,7 @@ public class Bird {
     boolean jump;
     int frameCounter;
     Texture[] frames;
-
+    SkinsScreen SkinsScreen;
     public Bird(float x, float y, float speed, float width, float height) {
         this.x = x;
         this.y = y;
@@ -24,11 +25,12 @@ public class Bird {
         this.width = width;
         this.height = height;
         frameCounter = 0;
+
         frames = new Texture[] {
-                new Texture("birdTiles/bird0.png"),
-                new Texture("birdTiles/bird1.png"),
-                new Texture("birdTiles/bird2.png"),
-                new Texture("birdTiles/bird1.png")
+                new Texture("birdTiles/bird" + SkinsScreen.n + "0.png"),
+                new Texture("birdTiles/bird" + SkinsScreen.n + "1.png"),
+                new Texture("birdTiles/bird" + SkinsScreen.n + "2.png"),
+                new Texture("birdTiles/bird" + SkinsScreen.n + "1.png")
         };
     }
 
@@ -68,5 +70,9 @@ public class Bird {
     }
     public boolean needAddPoint(Bird bird) {
         return false;
+    }
+
+    public void setFrames(Texture[] textures) {
+
     }
 }

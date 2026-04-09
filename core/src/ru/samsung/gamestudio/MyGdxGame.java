@@ -3,10 +3,7 @@ package ru.samsung.gamestudio;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import ru.samsung.gamestudio.screens.MenuScreen;
-import ru.samsung.gamestudio.screens.ResumeScreen;
-import ru.samsung.gamestudio.screens.ScreenGame;
-import ru.samsung.gamestudio.screens.ScreenRestart;
+import ru.samsung.gamestudio.screens.*;
 
 public class MyGdxGame extends Game {
     public SpriteBatch batch;
@@ -17,6 +14,9 @@ public class MyGdxGame extends Game {
     public ResumeScreen resumeScreen;
     public ScreenGame screenGame;
     public ScreenRestart screenRestart;
+    public SkinsScreen screenSkin;
+    public SkinsScreen skinsScreen;
+
     @Override
     public void create() {
         batch = new SpriteBatch();

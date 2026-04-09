@@ -2,6 +2,7 @@ package ru.samsung.gamestudio.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.ScreenUtils;
 import ru.samsung.gamestudio.Buton;
@@ -13,8 +14,8 @@ import ru.samsung.gamestudio.components.PointCounter;
 
 import java.util.ArrayList;
 
-import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 import static ru.samsung.gamestudio.MyGdxGame.SCR_HEIGHT;
+import static ru.samsung.gamestudio.MyGdxGame.SCR_WIDTH;
 
 public class ScreenGame implements Screen {
 
@@ -35,15 +36,22 @@ public class ScreenGame implements Screen {
     public ScreenGame(MyGdxGame game) {
         this.game = game;
         initGame();
+    }
+
+    public void initGame() {
+        bird = new Bird(200, 300, 10, 100, 100);
+        bird.setFrames(new Texture[]{
+
+
+
+
+        });
+
         pointCounter = new PointCounter(100, 600);
         bg = new MovingBackground();
         font = new BitmapFont();
         font.getData().setScale(4f);
         menuButton = new Buton(SCR_WIDTH - 200, SCR_HEIGHT - 100, 180, 70, "MENU");
-    }
-
-    public void initGame() {
-        bird = new Bird(200, 300, 10, 100, 100);
         initTubes();
     }
 
