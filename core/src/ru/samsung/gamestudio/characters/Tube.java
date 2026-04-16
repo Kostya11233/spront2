@@ -18,11 +18,11 @@ public class Tube {
     int speed = 14;
     final int width = 200;
     final int height = 700;
-    int gapHeight = 400;
-    int padding = 100;
+    int gapHeight = 300;
+    int padding = 10;
     public Tube(int count, int index) {
         random = new Random();
-        gapY = gapHeight / 2 + padding + random.nextInt(SCR_HEIGHT - 2 * (padding + gapHeight / 2));
+        gapY = gapHeight / 40 + padding + random.nextInt(SCR_HEIGHT - 2 * (padding + gapHeight / 40));
         distance = (SCR_WIDTH + width) / (count - 1);
         x = distance * index + SCR_WIDTH;
         top = new Texture("Tubes/tube_flipped.png");
