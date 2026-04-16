@@ -16,7 +16,7 @@ public class ResumeScreen implements Screen {
     public ResumeScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         buttonResume = new Buton(490, 400, 300, 110, "RESUME");
-        buttonExit = new Buton(100, 100, 400, 80, "EXIT MENU");
+        buttonExit = new Buton(400, 100, 400, 80, "EXIT MENU");
         background = new MovingBackground("restart_bg.png");
     }
 

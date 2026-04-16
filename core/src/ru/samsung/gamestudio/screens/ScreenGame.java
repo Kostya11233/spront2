@@ -42,9 +42,6 @@ public class ScreenGame implements Screen {
         bird = new Bird(200, 300, 10, 100, 100);
         bird.setFrames(new Texture[]{
 
-
-
-
         });
 
         pointCounter = new PointCounter(100, 600);
@@ -122,6 +119,7 @@ public class ScreenGame implements Screen {
         bird.draw(game.batch);
         pointCounter.draw(game.batch, gamePoints);
         font.draw(game.batch, "LIVES: " + lives, 100, SCR_HEIGHT - 50);
+        font.draw(game.batch, "SKIN: " + SkinsScreen.skinS, 350, SCR_HEIGHT - 50);
         menuButton.draw(game.batch);
         game.batch.end();
     }
